@@ -1,5 +1,3 @@
-import reset from '@unocss/reset/tailwind.css';
-import type { LinksFunction } from 'remix';
 import {
   Links,
   LiveReload,
@@ -9,19 +7,14 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 import * as React from 'react';
-import unocss from '~/uno.css';
+import type { LinksFunction } from '@remix-run/server-runtime';
+import styles from '~/styles/app.css';
 
 export const links: LinksFunction = () => [
-  {
-    rel: 'stylesheet',
-    href: unocss,
-  },
-  {
-    rel: 'stylesheet',
-    href: reset,
-  },
+  { rel: 'preload', href: styles, as: 'style' },
+  // Preload CSS to makes it nonblocking
+  { rel: 'stylesheet', href: styles },
 ];
-
 export default function App() {
   return (
     <html lang="en">

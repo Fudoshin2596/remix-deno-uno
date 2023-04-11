@@ -3,12 +3,12 @@
   "sideEffects": false,
   "scripts": {
     "build": "npm run build:css && cross-env NODE_ENV=production remix build",
-    "build:css": "unocss app/**/*.tsx --out-file=app/uno.css",
+    "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
     "deploy": "deployctl deploy --prod --include=build,public --project=afraid-crab-30 ./build/index.js",
     "dev": "npm-run-all build --parallel \"dev:*\"",
     "dev:deno": "cross-env NODE_ENV=development deno run --unstable --watch --allow-net --allow-read --allow-env ./build/index.js",
     "dev:remix": "remix watch",
-    "dev:css": "unocss app/**/*.tsx --out-file=app/uno.css",
+    "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
     "format": "deno fmt --ignore=node_modules,build,public/build",
     "lint": "deno lint --ignore=node_modules,build,public/build",
     "start": "cross-env NODE_ENV=production deno run --unstable --allow-net --allow-read --allow-env ./build/index.js",
@@ -26,20 +26,24 @@
     "server.ts"
   ],
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@remix-run/deno": "^1.15.0",
     "@remix-run/react": "^1.15.0",
+    "@tremor/react": "^2.1.0",
     "@unocss/reset": "^0.51.4",
     "isbot": "^3.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@iconify-json/heroicons": "^1.1.10",
     "@remix-run/dev": "^1.15.0",
     "@remix-run/eslint-config": "*",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
+    "@unocss/preset-icons": "^0.51.4",
     "concurrently": "^8.0.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
@@ -53,6 +57,7 @@
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.4",
+    "tailwindcss": "^3.3.1",
     "tsconfig-paths": "^4.1.2",
     "typescript": "^5.0.4",
     "unocss": "^0.51.4"
